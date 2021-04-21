@@ -17,15 +17,12 @@ public class Frame extends JPanel implements ActionListener, MouseListener {
 	/*
 	 * Create Objects
 	 */
-	// TEST COMMIT
 	
 	/*
 	 * Create music
 	 */
-	Music soundBazinga = new Music("sound/bazinga.wav", false);
-	Music soundPop = new Music("sound/pop.wav", false);
-	Music soundTrap = new Music("sound/trappedInJobIDontLove.wav", false);
-	Music soundPikachu = new Music("sound/pikachu.wav", false);
+	Music example = new Music("sound/exampleName.wav", false);
+
 	
 	public void paint(Graphics g) {
 		super.paint(g);	// Refresh the JFrame 

@@ -21,12 +21,11 @@ public class Frame extends JPanel implements ActionListener, MouseListener {
 	/*
 	 * Create music
 	 */
-	Music example = new Music("sound/exampleName.wav", false);
+//	Music example = new Music("sound/exampleName.wav", false);
 
 	
 	public void paint(Graphics g) {
 		super.paint(g);	// Refresh the JFrame 
-
 	}
 	
 	public static void main(String[] arg) {
@@ -35,7 +34,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener {
 	
 	public Frame() {
 		JFrame f = new JFrame("Afterlife");
-		f.setSize(new Dimension(900, 600));
+		f.setSize(new Dimension(1280, 720));
 		f.setBackground(Color.blue);
 		f.add(this);
 		f.addMouseListener(this);

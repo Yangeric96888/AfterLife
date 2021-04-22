@@ -17,7 +17,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener {
 	/*
 	 * Create Objects
 	 */
-	// Angry eric
+	// Angry eric eric
 	/*
 	 * Create music
 	 */

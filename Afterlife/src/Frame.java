@@ -16,10 +16,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener {
 	
 	/*
 	 * Create Objects
-	 */
+	 */ 
 	
 	/*
-	 * Create music
+	 * Create music 
 	 */
 //	Music example = new Music("sound/exampleName.wav", false);
 

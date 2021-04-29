@@ -1,3 +1,4 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -33,18 +34,26 @@ public class Frame extends JPanel implements ActionListener, MouseListener {
 	}
 	
 	public Frame() {
+		
 		JFrame f = new JFrame("Afterlife");
-		f.setSize(new Dimension(1280, 720));
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setResizable(false);
+		f.setLayout(new BorderLayout());
+		f.add(new GamePanel(), BorderLayout.CENTER);
+		f.pack();
+		f.setLocationRelativeTo(null);
+		f.setVisible(true);
+		
+		
+//		f.setSize(new Dimension(1280, 720));
 		f.setBackground(Color.blue);
 		f.add(this);
 		f.addMouseListener(this);
-		f.setResizable(false);
 		
 		Timer t = new Timer(16, this);
 	
 		t.start();
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setVisible(true);
+		
 	}
 	
 	

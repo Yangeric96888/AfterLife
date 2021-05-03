@@ -1,3 +1,8 @@
+/* 
+ * Summary: 
+ * This is the class that handles the various GameStates by holding them in a stack (with the top one being the one currently running)
+ */
+
 import java.awt.Graphics;
 import java.util.Stack;
 

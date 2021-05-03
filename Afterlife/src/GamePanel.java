@@ -1,3 +1,9 @@
+/* 
+ * Summary: 
+ * This is the main class that handles the logistics behind the game, such as starting it and handling FPS. 
+ * It relies on a GameStateManager object to handle the actual game (like the menu or level screen)
+ */
+
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;

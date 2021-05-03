@@ -1,3 +1,9 @@
+/* 
+ * Summary: 
+ * This is the main class that handles the logistics behind the game, such as starting it and handling FPS. 
+ * It relies on a GameStateManager object to handle the actual game (like the menu or level screen)
+ */
+
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
@@ -18,6 +24,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	private int FPS = 60;
 	private long targetTime = 1000 / FPS;
 	
+	private GameStateManager gsm;
+	
 	public GamePanel() {
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		start();
@@ -36,6 +44,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	 */
 	
 	public void run() {
+		
+		gsm = new GameStateManager();
+		
 		while(isRunning) {
 			long start, elapsed, wait;
 			start = System.nanoTime();
@@ -60,11 +71,15 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	}
 	
 	public void tick() {
-		
+		gsm.tick();
 	}
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		
+		g.clearRect(0, 0, WIDTH, HEIGHT);
+		
+		gsm.draw(g);
 	}
 
 	/*
@@ -72,21 +87,19 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	 * KEY INPUTS
 	 * ******************************
 	 */
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
+		gsm.keyPressed(e.getKeyCode());
 		
 	}
+	
+	@Override
+	public void keyTyped(KeyEvent e) {}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
+		gsm.keyPressed(e.getKeyCode());
 		
 	}
 }

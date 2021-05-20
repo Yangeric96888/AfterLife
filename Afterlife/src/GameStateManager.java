@@ -12,6 +12,7 @@ public class GameStateManager {
 	
 	public GameStateManager() {
 		states = new Stack<GameState>();
+		states.push(new MenuState(this));
 	}
 	
 	public void tick() {

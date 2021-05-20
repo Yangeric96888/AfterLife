@@ -1,7 +1,11 @@
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class MenuState extends GameState {
-
+	
+	private String[] options = {"Start", "Help", "Quit"};
+	private int currentSelection = 0;
+	
 	protected MenuState(GameStateManager gsm) {
 		super(gsm);
 		// TODO Auto-generated constructor stub
@@ -21,7 +25,15 @@ public class MenuState extends GameState {
 
 	@Override
 	public void draw(Graphics g) {
-		// TODO Auto-generated method stub
+		for (int i = 0; i < options.length; i++) {
+			if (i == currentSelection) {
+				g.setColor(Color.green);
+			} else {
+				g.setColor(Color.black);
+			}
+			
+			g.drawString(options[i], GamePanel.WIDTH / 2 - 50, 50 + i * 30);
+		}
 		
 	}
 

@@ -49,11 +49,6 @@ public class MenuState extends GameState {
 
 	@Override
 	public void keyPressed(int k) {
-
-	}
-
-	@Override
-	public void keyReleased(int k) {
 		if (k == KeyEvent.VK_DOWN) {
 			currentSelection++;
 			if (currentSelection >= options.length) {
@@ -76,6 +71,11 @@ public class MenuState extends GameState {
 				System.exit(0);
 			}
 		}
+	}
+
+	@Override
+	public void keyReleased(int k) {
+
 		
 	}
 

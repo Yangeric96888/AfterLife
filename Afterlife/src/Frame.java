@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class Frame extends JPanel implements ActionListener, MouseListener {
+public class Frame extends JPanel {
 	
 	/*
 	 * Create Objects
@@ -48,55 +48,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener {
 //		f.setSize(new Dimension(1280, 720));
 		f.setBackground(Color.blue);
 		f.add(this);
-		f.addMouseListener(this);
-		
-		Timer t = new Timer(16, this);
-	
-		t.start();
 		
 	}
 	
-	
-	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-		/*
-		 * Checks whether if you had hit a duck, its Pikachu, or have missed
-		 * If you have hit a Pokeball, it transforms into a Pikachu object
-		 */
-		
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		repaint();
-	}
-
 }

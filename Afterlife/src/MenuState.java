@@ -64,7 +64,7 @@ public class MenuState extends GameState {
 		// When players picks a button
 		if (k == KeyEvent.VK_ENTER) {
 			if (currentSelection == 0) {
-				
+				gsm.states.push(new Level1State(gsm));
 			} else if (currentSelection == 1) {
 				
 			} else if (currentSelection == 2) {

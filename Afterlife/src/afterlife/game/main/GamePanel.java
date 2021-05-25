@@ -15,8 +15,6 @@ import javax.swing.JPanel;
 import afterlife.game.gamestate.GameStateManager;
 
 public class GamePanel extends JPanel implements Runnable, KeyListener {
-
-	private static final long serialVersionUID = 1L;
 	
 	public static final int WIDTH = 900;
 	public static final int HEIGHT = 550;
@@ -63,7 +61,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 			
 			// Establishes set FPS; if the computer is too fast, we automatically slow it down
 			elapsed = System.nanoTime() - start;
-			wait = targetTime - elapsed / 10000000;
+			wait = targetTime - elapsed / 100000000;
 			
 			if (wait < 0) {
 				wait = 5;

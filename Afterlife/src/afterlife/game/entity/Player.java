@@ -5,19 +5,27 @@ package afterlife.game.entity;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 
+import afterlife.game.gamestate.GameState;
 import afterlife.game.main.GamePanel;
+import afterlife.game.object.Block;
+import afterlife.game.physic.Collision;
 
 public class Player extends Rectangle {
 	
 	//Movement booleans
 	private boolean right = false, left = false, jumping = false, falling = false;
+	private boolean topCollision = false;
 	
 	// Location / size
 	private double x, y;
 	private int width, height;
+	
+	// Move speed
+	private double moveSpeed = 2.5;
 	
 	// Jump speed
 	private double jumpSpeed = 5;
@@ -34,20 +42,55 @@ public class Player extends Rectangle {
 		this.height = height;
 	}
 	
-	public void tick() {
+	public void tick(Block[] b) {
+		
+		// Collision 
+		for (Block currentB : b) {
+			
+			// Right
+			if (Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset, (int) y + (int) GameState.yOffset + 2), currentB) || 
+				Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset, (int) y + height + (int) GameState.yOffset - 1), currentB)) {
+					right = false;
+			}
+			
+			// Left
+			if (Collision.playerBlock(new Point((int) x + (int) GameState.xOffset - 1, (int) y + (int) GameState.yOffset + 2), currentB) || 
+				Collision.playerBlock(new Point((int) x + (int) GameState.xOffset - 1, (int) y + height + (int) GameState.yOffset - 1), currentB)) {
+					left = false;
+			}
+			
+			// Top
+			if (Collision.playerBlock(new Point((int) x + (int) GameState.xOffset + 1, (int) y + (int) GameState.yOffset), currentB) || 
+				Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset - 1, (int) y + (int) GameState.yOffset), currentB)) {
+					y = currentB.getY() - (int) GameState.yOffset;
+					jumping = false;
+					falling = true;
+			}
+			
+			// Bottom
+			if (Collision.playerBlock(new Point((int) x + (int) GameState.xOffset + 2, (int) y + height + (int) GameState.yOffset + 1), currentB) || 
+				Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset - 1, (int) y + height + (int) GameState.yOffset + 1), currentB)) {
+					falling = false;
+					topCollision = true;
+			} else if (!topCollision && !jumping) {
+					falling = true;
+			}
+		}
+		
+		topCollision = false;
 		
 		// Movement for player
+		// !!! The movement right now is bugged because when you press, it just flies off
 		if (right) {
-			x += 10;
-			right = false;
+			GameState.xOffset += moveSpeed;
 		} 
 		
 		if (left) {
-			x--;
+			GameState.xOffset -= moveSpeed;
 		}
 		
 		if (jumping) {
-			y -= currentJumpSpeed;
+			GameState.yOffset -= currentJumpSpeed;
 			currentJumpSpeed -= 0.1;
 			
 			if (currentJumpSpeed <= 0) {
@@ -58,7 +101,7 @@ public class Player extends Rectangle {
 		}
 		
 		if (falling) {
-			y += currentFallSpeed;
+			GameState.yOffset += currentFallSpeed;
 			
 			if (currentFallSpeed < maxFallSpeed) {
 				currentFallSpeed += 0.1;
@@ -78,7 +121,7 @@ public class Player extends Rectangle {
 	public void keyPressed(int k) {
 		if (k == KeyEvent.VK_D) right = true;
 		if (k == KeyEvent.VK_A) left = true;
-		if (k == KeyEvent.VK_SPACE) jumping = true;
+		if (k == KeyEvent.VK_SPACE && !jumping && !falling) jumping = true;	// To add double-jumping, removing !jumping and !falling
 	}
 	
 	public void keyReleased(int k) {

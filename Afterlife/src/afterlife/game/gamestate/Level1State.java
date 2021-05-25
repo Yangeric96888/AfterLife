@@ -2,10 +2,13 @@ package afterlife.game.gamestate;
 import java.awt.Graphics;
 
 import afterlife.game.entity.Player;
+import afterlife.game.object.Block;
 
 public class Level1State extends GameState{
 	
 	private Player player;
+	
+	private Block[] b;
 	
 	public Level1State(GameStateManager gsm) {
 		super(gsm);
@@ -16,11 +19,20 @@ public class Level1State extends GameState{
 	public void init() {
 		player = new Player(30, 30);
 		
+		b = new Block[3];
+		
+		b[0] = new Block (100, 100);
+		b[1] = new Block (200, 200);
+		b[2] = new Block (300, 300);
 	}
 
 	@Override
 	public void tick() {
-		player.tick();
+		for (Block currentB : b) {
+			currentB.tick();
+		}
+		
+		player.tick(b);
 		
 	}
 
@@ -28,6 +40,9 @@ public class Level1State extends GameState{
 	public void draw(Graphics g) {
 		player.draw(g);
 		
+		for (Block currentB : b) {
+			currentB.draw(g);
+		}
 	}
 
 	@Override

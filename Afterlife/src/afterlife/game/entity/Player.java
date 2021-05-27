@@ -83,10 +83,13 @@ public class Player extends Rectangle {
 		// !!! The movement right now is bugged because when you press, it just flies off
 		if (right) {
 			GameState.xOffset += moveSpeed;
+			System.out.print("b");
+			right = false;
 		} 
 		
 		if (left) {
 			GameState.xOffset -= moveSpeed;
+			left = false;
 		}
 		
 		if (jumping) {
@@ -125,8 +128,11 @@ public class Player extends Rectangle {
 	}
 	
 	public void keyReleased(int k) {
-		if (k == KeyEvent.VK_D) right = false;
-		if (k == KeyEvent.VK_A) left = false;		
+		if (k == KeyEvent.VK_D) {
+			right = false;
+		}
+		if (k == KeyEvent.VK_A) left = false;	
+
 	}
 	
 }

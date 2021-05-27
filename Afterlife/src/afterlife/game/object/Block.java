@@ -19,6 +19,7 @@ public class Block extends Rectangle {
 	
 	public void draw(Graphics g) {
 		// Does not work for some reason g.fillRect(x - (int) GameState.xOffset, y - (int) GameState.yOffset, blockSize, blockSize);
-		g.fillRect(x , y, blockSize, blockSize);
+		g.fillRect(x - (int) GameState.xOffset, y /* - (int) GameState.yOffset */, blockSize, blockSize);
+
 	}
 }

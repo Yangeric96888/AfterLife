@@ -8,9 +8,14 @@ import java.awt.Graphics;
 
 public abstract class GameState {
 	protected GameStateManager gsm;
+	public static double xOffset, yOffset;
 	
 	public GameState(GameStateManager gsm) {
 		this.gsm = gsm;
+		
+		this.xOffset = 0;
+		this.yOffset = 0;
+		
 		init();
 	}
 	

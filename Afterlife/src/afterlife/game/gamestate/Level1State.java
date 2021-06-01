@@ -20,11 +20,12 @@ public class Level1State extends GameState{
 	public void init() {
 		player = new Player(30, 30);
 		
-		b = new Block[3];
+		b = new Block[4];
 		
 		b[0] = new Block ( 800, GamePanel.HEIGHT / 2);
 		b[1] = new Block (400, GamePanel.HEIGHT / 2);
 		b[2] = new Block (300, 300);
+		b[3] = new Block(GamePanel.WIDTH / 2, GamePanel.HEIGHT / 2 + 50);
 	}
 
 	@Override

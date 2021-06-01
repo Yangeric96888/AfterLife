@@ -32,8 +32,9 @@ public class Player extends Rectangle {
 	private double currentJumpSpeed = jumpSpeed;
 	
 	// Fall speed
-	private double maxFallSpeed  = 5;
-	private double currentFallSpeed = 0.1;
+	private double maxFallSpeed  = 0.1;
+	private double currentFallSpeed = 0.001;
+	
 	
 	public Player(int width, int height) {
 		x = GamePanel.WIDTH / 2;
@@ -70,14 +71,16 @@ public class Player extends Rectangle {
 			}
 			
 			// Bottom
-			/*
+			
 			if (Collision.playerBlock(new Point((int) x + (int) GameState.xOffset + 2, (int) y + height + (int) GameState.yOffset + 1), currentB) || 
 				Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset - 1, (int) y + height + (int) GameState.yOffset + 1), currentB)) {
 					falling = false;
 					topCollision = true;
+					System.out.print("b");
 			} else if (!topCollision && !jumping) {
 					falling = true;
-			} */
+					System.out.print("c");
+			} 
 		} 
 		
 		topCollision = false;
@@ -113,12 +116,12 @@ public class Player extends Rectangle {
 			GameState.yOffset += currentFallSpeed;
 			
 			if (currentFallSpeed < maxFallSpeed) {
-				currentFallSpeed += 0.1;
+				currentFallSpeed += 0.000001;
 			}
 		}
 		
 		if (!falling) {
-			currentFallSpeed = 0.1;
+			currentFallSpeed = 0.001;
 		}
 	}
 	

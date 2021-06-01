@@ -2,6 +2,7 @@ package afterlife.game.gamestate;
 import java.awt.Graphics;
 
 import afterlife.game.entity.Player;
+import afterlife.game.main.GamePanel;
 import afterlife.game.object.Block;
 
 public class Level1State extends GameState{
@@ -21,8 +22,8 @@ public class Level1State extends GameState{
 		
 		b = new Block[3];
 		
-		b[0] = new Block (100, 100);
-		b[1] = new Block (200, 200);
+		b[0] = new Block ( 800, GamePanel.HEIGHT / 2);
+		b[1] = new Block (400, GamePanel.HEIGHT / 2);
 		b[2] = new Block (300, 300);
 	}
 

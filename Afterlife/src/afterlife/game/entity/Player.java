@@ -48,15 +48,17 @@ public class Player extends Rectangle {
 		for (Block currentB : b) {
 			
 			// Right
-			if (Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset, (int) y + (int) GameState.yOffset + 2), currentB) || 
-				Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset, (int) y + height + (int) GameState.yOffset - 1), currentB)) {
+			if (Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset + 2, (int) y + (int) GameState.yOffset + 2), currentB) || 
+				Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset + 2, (int) y + height + (int) GameState.yOffset - 1), currentB)) {
 					right = false;
-			}
+					GameState.xOffset--;
+				}
 			
 			// Left
 			if (Collision.playerBlock(new Point((int) x + (int) GameState.xOffset - 1, (int) y + (int) GameState.yOffset + 2), currentB) || 
 				Collision.playerBlock(new Point((int) x + (int) GameState.xOffset - 1, (int) y + height + (int) GameState.yOffset - 1), currentB)) {
 					left = false;
+					GameState.xOffset++;
 			}
 			
 			// Top
@@ -68,14 +70,15 @@ public class Player extends Rectangle {
 			}
 			
 			// Bottom
+			/*
 			if (Collision.playerBlock(new Point((int) x + (int) GameState.xOffset + 2, (int) y + height + (int) GameState.yOffset + 1), currentB) || 
 				Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset - 1, (int) y + height + (int) GameState.yOffset + 1), currentB)) {
 					falling = false;
 					topCollision = true;
 			} else if (!topCollision && !jumping) {
 					falling = true;
-			}
-		}
+			} */
+		} 
 		
 		topCollision = false;
 		
@@ -83,7 +86,6 @@ public class Player extends Rectangle {
 		// !!! The movement right now is bugged because when you press, it just flies off
 		if (right) {
 			GameState.xOffset += moveSpeed;
-			System.out.print("b");
 			right = false;
 		} 
 		
@@ -92,9 +94,13 @@ public class Player extends Rectangle {
 			left = false;
 		}
 		
+		// Jumping 
 		if (jumping) {
+			System.out.print("b");
 			GameState.yOffset -= currentJumpSpeed;
 			currentJumpSpeed -= 0.1;
+			
+			System.out.print("b");
 			
 			if (currentJumpSpeed <= 0) {
 				currentJumpSpeed = jumpSpeed;

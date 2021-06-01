@@ -25,16 +25,16 @@ public class Player extends Rectangle {
 	private int width, height;
 	
 	// Move speed
-	private double moveSpeed = 2.5;
+	private double moveSpeed = 5;
 	
 	// Jump speed
-	private double jumpSpeed = 5;
+	private double jumpSpeed = 0.025;
 	private double currentJumpSpeed = jumpSpeed;
 	
 	// Fall speed
 	private double maxFallSpeed  = 0.1;
 	private double currentFallSpeed = 0.001;
-	
+	private double acceleration = 0.000001;
 	
 	public Player(int width, int height) {
 		x = GamePanel.WIDTH / 2;
@@ -101,7 +101,7 @@ public class Player extends Rectangle {
 		if (jumping) {
 			System.out.print("b");
 			GameState.yOffset -= currentJumpSpeed;
-			currentJumpSpeed -= 0.1;
+			currentJumpSpeed -= acceleration;
 			
 			System.out.print("b");
 			
@@ -116,7 +116,7 @@ public class Player extends Rectangle {
 			GameState.yOffset += currentFallSpeed;
 			
 			if (currentFallSpeed < maxFallSpeed) {
-				currentFallSpeed += 0.000001;
+				currentFallSpeed += acceleration;
 			}
 		}
 		

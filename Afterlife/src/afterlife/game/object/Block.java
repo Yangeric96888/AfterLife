@@ -7,11 +7,17 @@ import afterlife.game.gamestate.GameState;
 
 public class Block extends Rectangle {
 	
-	public static final int blockSize = 32;
+	public int blockSize = 32;
 	
 	public Block(int x, int y) {
+		
 		setBounds(x, y, blockSize, blockSize);
 	}
+	
+	public Block(int x, int y, int blockSize) {
+		setBounds(x, y, blockSize, blockSize);
+	}
+	
 	
 	public void tick() {
 

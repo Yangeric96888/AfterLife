@@ -43,44 +43,46 @@ public class Player extends Rectangle {
 		this.height = height;
 	}
 	
-	public void tick(Block[] b) {
+	public void tick(Block[][] b) {
 		
 		// Collision 
-		for (Block currentB : b) {
+		for (Block[] currentBlockRow : b) {
 			
-			// Right
-			if (Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset + 2, (int) y + (int) GameState.yOffset + 2), currentB) || 
-				Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset + 2, (int) y + height + (int) GameState.yOffset - 1), currentB)) {
-					right = false;
-					GameState.xOffset--;
+			for (Block currentB : currentBlockRow ) {
+				// Right
+				if (Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset + 2, (int) y + (int) GameState.yOffset + 2), currentB) || 
+					Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset + 2, (int) y + height + (int) GameState.yOffset - 1), currentB)) {
+						right = false;
+						GameState.xOffset--;
+					}
+				
+				// Left
+				if (Collision.playerBlock(new Point((int) x + (int) GameState.xOffset - 1, (int) y + (int) GameState.yOffset + 2), currentB) || 
+					Collision.playerBlock(new Point((int) x + (int) GameState.xOffset - 1, (int) y + height + (int) GameState.yOffset - 1), currentB)) {
+						left = false;
+						GameState.xOffset++;
 				}
-			
-			// Left
-			if (Collision.playerBlock(new Point((int) x + (int) GameState.xOffset - 1, (int) y + (int) GameState.yOffset + 2), currentB) || 
-				Collision.playerBlock(new Point((int) x + (int) GameState.xOffset - 1, (int) y + height + (int) GameState.yOffset - 1), currentB)) {
-					left = false;
-					GameState.xOffset++;
+				
+				// Top
+				if (Collision.playerBlock(new Point((int) x + (int) GameState.xOffset + 1, (int) y + (int) GameState.yOffset), currentB) || 
+					Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset - 1, (int) y + (int) GameState.yOffset), currentB)) {
+						y = currentB.getY() - (int) GameState.yOffset;
+						jumping = false;
+						falling = true;
+				}
+				
+				// Bottom
+				
+				if (Collision.playerBlock(new Point((int) x + (int) GameState.xOffset + 2, (int) y + height + (int) GameState.yOffset + 1), currentB) || 
+					Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset - 1, (int) y + height + (int) GameState.yOffset + 1), currentB)) {
+						falling = false;
+						topCollision = true;
+						System.out.print("b");
+				} else if (!topCollision && !jumping) {
+						falling = true;
+						System.out.print("c");
+				} 
 			}
-			
-			// Top
-			if (Collision.playerBlock(new Point((int) x + (int) GameState.xOffset + 1, (int) y + (int) GameState.yOffset), currentB) || 
-				Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset - 1, (int) y + (int) GameState.yOffset), currentB)) {
-					y = currentB.getY() - (int) GameState.yOffset;
-					jumping = false;
-					falling = true;
-			}
-			
-			// Bottom
-			
-			if (Collision.playerBlock(new Point((int) x + (int) GameState.xOffset + 2, (int) y + height + (int) GameState.yOffset + 1), currentB) || 
-				Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset - 1, (int) y + height + (int) GameState.yOffset + 1), currentB)) {
-					falling = false;
-					topCollision = true;
-					System.out.print("b");
-			} else if (!topCollision && !jumping) {
-					falling = true;
-					System.out.print("c");
-			} 
 		} 
 		
 		topCollision = false;

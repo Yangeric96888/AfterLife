@@ -1,5 +1,6 @@
 package afterlife.game.object;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
@@ -7,7 +8,7 @@ import afterlife.game.gamestate.GameState;
 
 public class Block extends Rectangle {
 	
-	public int blockSize = 32;
+	public static int blockSize = 32;
 	
 	public Block(int x, int y) {
 		
@@ -25,6 +26,7 @@ public class Block extends Rectangle {
 	
 	public void draw(Graphics g) {
 		// Does not work for some reason g.fillRect(x - (int) GameState.xOffset, y - (int) GameState.yOffset, blockSize, blockSize);
+		g.setColor(Color.black);
 		g.fillRect(x - (int) GameState.xOffset, y   - (int) GameState.yOffset , blockSize, blockSize);
 
 	}

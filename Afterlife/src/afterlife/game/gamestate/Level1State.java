@@ -14,12 +14,12 @@ public class Level1State extends GameState{
 	
 	public Level1State(GameStateManager gsm) {
 		super(gsm);
-		map = new Map("", 4, 4);
 	}
 
 	@Override
 	public void init() {
 		player = new Player(30, 30);
+		map = new Map("/map1.map");
 		
 		xOffset = -200;
 		yOffset = -400;

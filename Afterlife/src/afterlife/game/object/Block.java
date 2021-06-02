@@ -8,17 +8,13 @@ import afterlife.game.gamestate.GameState;
 
 public class Block extends Rectangle {
 	
-	public static int blockSize = 32;
+	public static int blockSize = 64;
+	private int id;
 	
-	public Block(int x, int y) {
-		
+	public Block(int x, int y, int id) {
 		setBounds(x, y, blockSize, blockSize);
-	}
-	
-	public Block(int x, int y, int blockSize) {
-		setBounds(x, y, blockSize, blockSize);
-	}
-	
+		this.id = id;
+	}	
 	
 	public void tick() {
 
@@ -27,7 +23,19 @@ public class Block extends Rectangle {
 	public void draw(Graphics g) {
 		// Does not work for some reason g.fillRect(x - (int) GameState.xOffset, y - (int) GameState.yOffset, blockSize, blockSize);
 		g.setColor(Color.black);
-		g.fillRect(x - (int) GameState.xOffset, y   - (int) GameState.yOffset , blockSize, blockSize);
+		if(id != 0) {
+			g.fillRect(x - (int) GameState.xOffset, y   - (int) GameState.yOffset , blockSize, blockSize);
+		}
 
 	}
+	
+	// getters and setters
+	public void setID(int id) {
+		this.id = id;
+	}
+	
+	public int getID() {
+		return id;
+	}
+	
 }

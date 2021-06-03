@@ -28,13 +28,13 @@ public class Player extends Rectangle {
 	private double moveSpeed = 5;
 
 	// Jump speed
-	private double jumpSpeed = 0.025;
+	private double jumpSpeed = 10;
 	private double currentJumpSpeed = jumpSpeed;
 
 	// Fall speed
-	private double maxFallSpeed = 0.15;
-	private double currentFallSpeed = 0.001;
-	private double acceleration = 0.000001;
+	private double maxFallSpeed = 0.00000000000000005;
+	private double currentFallSpeed = 0.0001;
+	private double acceleration = 0.0005;
 
 	public Player(int width, int height) {
 		x = GamePanel.WIDTH / 2;
@@ -77,10 +77,8 @@ public class Player extends Rectangle {
 							|| Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset - 2, (int) y + height + (int) GameState.yOffset + 1), currentB)) {
 						falling = false;
 						topCollision = true;
-						System.out.print("b");
 					} else if (!topCollision && !jumping) {
 						falling = true;
-						System.out.print("c");
 					}
 				}
 			}
@@ -103,11 +101,9 @@ public class Player extends Rectangle {
 
 		// Jumping
 		if (jumping) {
-			System.out.print("b");
 			GameState.yOffset -= currentJumpSpeed;
-			currentJumpSpeed -= acceleration;
+			currentJumpSpeed -= (0.1);
 
-			System.out.print("b");
 
 			if (currentJumpSpeed <= 0) {
 				currentJumpSpeed = jumpSpeed;
@@ -120,12 +116,12 @@ public class Player extends Rectangle {
 			GameState.yOffset += currentFallSpeed;
 
 			if (currentFallSpeed < maxFallSpeed) {
-				currentFallSpeed += acceleration;
+				currentFallSpeed += acceleration ;
 			}
 		}
 
 		if (!falling) {
-			currentFallSpeed = 0.001;
+			currentFallSpeed = 0.0001;
 		}
 	}
 
@@ -139,8 +135,11 @@ public class Player extends Rectangle {
 			right = true;
 		if (k == KeyEvent.VK_A)
 			left = true;
-		if (k == KeyEvent.VK_SPACE && !jumping && !falling)
+		if (k == KeyEvent.VK_SPACE && !jumping && !falling) {
 			jumping = true; // To add double-jumping, removing !jumping and !falling
+			System.out.print("x");
+		}
+			
 	}
 
 	public void keyReleased(int k) {

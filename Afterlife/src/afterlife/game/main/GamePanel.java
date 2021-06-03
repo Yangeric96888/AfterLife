@@ -59,19 +59,19 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 			tick();
 			repaint();
 			
-			// Establishes set FPS; if the computer is too fast, we automatically slow it down
-			elapsed = System.nanoTime() - start;
-			wait = targetTime - elapsed / 100000000;
-			
-			if (wait < 0) {
-				wait = 5;
-			}
-			
-			try {
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+//			// Establishes set FPS; if the computer is too fast, we automatically slow it down
+//			elapsed = System.nanoTime() - start;
+//			wait = targetTime - elapsed / 100000000;
+//			
+//			if (wait < 0) {
+//				wait = 5;
+//			}
+//			
+//			try {
+//				
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
 		}
 	}
 	

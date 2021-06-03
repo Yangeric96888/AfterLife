@@ -28,7 +28,7 @@ public class Player extends Rectangle {
 	private double moveSpeed = 5;
 
 	// Jump speed
-	private double jumpSpeed = 10;
+	private double jumpSpeed = 0.5;
 	private double currentJumpSpeed = jumpSpeed;
 
 	// Fall speed
@@ -66,8 +66,7 @@ public class Player extends Rectangle {
 
 					// Top
 					if (Collision.playerBlock(new Point((int) x + (int) GameState.xOffset + 1, (int) y + (int) GameState.yOffset), currentB)
-							|| Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset - 2, (int) y + (int) GameState.yOffset), currentB)) {
-						y = currentB.getY() - (int) GameState.yOffset;
+							|| Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset - 2, (int) y + (int) GameState.yOffset), currentB)) {					
 						jumping = false;
 						falling = true;
 					}
@@ -102,8 +101,8 @@ public class Player extends Rectangle {
 		// Jumping
 		if (jumping) {
 			GameState.yOffset -= currentJumpSpeed;
-			currentJumpSpeed -= (0.1);
-
+			currentJumpSpeed -= (0.0001);
+			
 
 			if (currentJumpSpeed <= 0) {
 				currentJumpSpeed = jumpSpeed;
@@ -135,9 +134,10 @@ public class Player extends Rectangle {
 			right = true;
 		if (k == KeyEvent.VK_A)
 			left = true;
-		if (k == KeyEvent.VK_SPACE && !jumping && !falling) {
+		if (k == KeyEvent.VK_SPACE && !jumping && !falling ) {
 			jumping = true; // To add double-jumping, removing !jumping and !falling
 			System.out.print("x");
+			
 		}
 			
 	}

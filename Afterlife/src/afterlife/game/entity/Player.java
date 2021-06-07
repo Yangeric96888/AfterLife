@@ -51,29 +51,29 @@ public class Player extends Rectangle {
 			for (Block currentB : currentBlockRow) {
 				if (currentB.getID() != 0) {
 					// Right
-					if (Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset + 2, (int) y + (int) GameState.yOffset + 2), currentB)
-							|| Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset + 2, (int) y + height + (int) GameState.yOffset - 1), currentB)) {
+					if (Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset, (int) y + (int) GameState.yOffset), currentB)
+							|| Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset, (int) y + height + (int) GameState.yOffset), currentB)) {
 						right = false;
 						GameState.xOffset--;
 					}
 
 					// Left
-					if (Collision.playerBlock(new Point((int) x + (int) GameState.xOffset - 1, (int) y + (int) GameState.yOffset + 2), currentB)
-							|| Collision.playerBlock(new Point((int) x + (int) GameState.xOffset - 1, (int) y + height + (int) GameState.yOffset - 1), currentB)) {
+					if (Collision.playerBlock(new Point((int) x + (int) GameState.xOffset, (int) y + (int) GameState.yOffset), currentB)
+							|| Collision.playerBlock(new Point((int) x + (int) GameState.xOffset, (int) y + height + (int) GameState.yOffset), currentB)) {
 						left = false;
 						GameState.xOffset++;
 					}
 
 					// Top
-					if (Collision.playerBlock(new Point((int) x + (int) GameState.xOffset + 1, (int) y + (int) GameState.yOffset), currentB)
-							|| Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset - 2, (int) y + (int) GameState.yOffset), currentB)) {					
+					if (Collision.playerBlock(new Point((int) x + (int) GameState.xOffset, (int) y + (int) GameState.yOffset), currentB)
+							|| Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset, (int) y + (int) GameState.yOffset), currentB)) {					
 						jumping = false;
 						falling = true;
 					}
 
 					// Bottom
-					if (Collision.playerBlock(new Point((int) x + (int) GameState.xOffset + 2, (int) y + height + (int) GameState.yOffset + 1), currentB)
-							|| Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset - 2, (int) y + height + (int) GameState.yOffset + 1), currentB)) {
+					if (Collision.playerBlock(new Point((int) x + (int) GameState.xOffset, (int) y + height + (int) GameState.yOffset), currentB)
+							|| Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset, (int) y + height + (int) GameState.yOffset), currentB)) {
 						falling = false;
 						topCollision = true;
 					} else if (!topCollision && !jumping) {

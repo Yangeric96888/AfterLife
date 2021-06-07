@@ -13,6 +13,7 @@ import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 
 import afterlife.game.gamestate.GameStateManager;
+import afterlife.game.resources.Images;
 
 public class GamePanel extends JPanel implements Runnable, KeyListener {
 	
@@ -32,6 +33,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		
 		addKeyListener(this);
 		setFocusable(true);
+		
+		new Images();
 		
 		start();
 	}
@@ -63,9 +66,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 			elapsed = System.nanoTime() - start;
 			wait = targetTime - elapsed / 100000000;
 			
-			if (wait < 0) {
-				wait = 5;
-			}
+//			if (wait < 0) {
+//				wait = 5;
+//			}
 			
 			try {
 				

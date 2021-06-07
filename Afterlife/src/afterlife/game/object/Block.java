@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import afterlife.game.gamestate.GameState;
+import afterlife.game.resources.Images;
 
 public class Block extends Rectangle {
 	
@@ -24,7 +25,7 @@ public class Block extends Rectangle {
 		// Does not work for some reason g.fillRect(x - (int) GameState.xOffset, y - (int) GameState.yOffset, blockSize, blockSize);
 		g.setColor(Color.black);
 		if(id != 0) {
-			g.fillRect(x - (int) GameState.xOffset, y   - (int) GameState.yOffset , blockSize, blockSize);
+			g.drawImage(Images.blocks[id - 1],x - (int) GameState.xOffset, y   - (int) GameState.yOffset , blockSize, blockSize, null);
 		}
 
 	}

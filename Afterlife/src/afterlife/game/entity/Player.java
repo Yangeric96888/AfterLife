@@ -25,14 +25,15 @@ public class Player extends Rectangle {
 	private int width, height;
 
 	// Move speed
-	private double moveSpeed = 5;
+	private double moveSpeed = 6.2;
 
 	// Jump speed
-	private double jumpSpeed = 0.015;
+//	private double jumpSpeed = 0.015;
+	private double jumpSpeed = 0.0015;
 	private double currentJumpSpeed = jumpSpeed;
 
 	// Fall speed
-	private double maxFallSpeed = 0.0001;
+	private double maxFallSpeed = 0.001;
 	private double currentFallSpeed = 0.00000000000000005;
 	private double acceleration = 0.0000005;
 
@@ -50,30 +51,31 @@ public class Player extends Rectangle {
 
 			for (Block currentB : currentBlockRow) {
 				if (currentB.getID() != 0) {
+
 					// Right
-					if (Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset, (int) y + (int) GameState.yOffset), currentB)
-							|| Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset, (int) y + height + (int) GameState.yOffset), currentB)) {
+					if (Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset + 2, (int) y + (int) GameState.yOffset + 2), currentB)
+							|| Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset + 2, (int) y + height + (int) GameState.yOffset - 1), currentB)) {
 						right = false;
 						GameState.xOffset--;
 					}
-
+					
 					// Left
-					if (Collision.playerBlock(new Point((int) x + (int) GameState.xOffset, (int) y + (int) GameState.yOffset), currentB)
-							|| Collision.playerBlock(new Point((int) x + (int) GameState.xOffset, (int) y + height + (int) GameState.yOffset), currentB)) {
+					if (Collision.playerBlock(new Point((int) x + (int) GameState.xOffset - 1, (int) y + (int) GameState.yOffset + 2), currentB)
+							|| Collision.playerBlock(new Point((int) x + (int) GameState.xOffset - 1, (int) y + height + (int) GameState.yOffset - 1), currentB)) {
 						left = false;
 						GameState.xOffset++;
 					}
 
 					// Top
-					if (Collision.playerBlock(new Point((int) x + (int) GameState.xOffset, (int) y + (int) GameState.yOffset), currentB)
-							|| Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset, (int) y + (int) GameState.yOffset), currentB)) {					
+					if (Collision.playerBlock(new Point((int) x + (int) GameState.xOffset + 1, (int) y + (int) GameState.yOffset), currentB)
+							|| Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset - 2, (int) y + (int) GameState.yOffset), currentB)) {					
 						jumping = false;
 						falling = true;
 					}
 
 					// Bottom
-					if (Collision.playerBlock(new Point((int) x + (int) GameState.xOffset, (int) y + height + (int) GameState.yOffset), currentB)
-							|| Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset, (int) y + height + (int) GameState.yOffset), currentB)) {
+					if (Collision.playerBlock(new Point((int) x + (int) GameState.xOffset + 2, (int) y + height + (int) GameState.yOffset + 1), currentB)
+							|| Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset - 2, (int) y + height + (int) GameState.yOffset + 1), currentB)) {
 						falling = false;
 						topCollision = true;
 					} else if (!topCollision && !jumping) {
@@ -101,7 +103,7 @@ public class Player extends Rectangle {
 		// Jumping
 		if (jumping) {
 			GameState.yOffset -= currentJumpSpeed;
-			currentJumpSpeed -= (acceleration);
+			currentJumpSpeed -= (acceleration/95);
 			
 
 			if (currentJumpSpeed <= 0) {
@@ -115,7 +117,7 @@ public class Player extends Rectangle {
 			GameState.yOffset += currentFallSpeed;
 
 			if (currentFallSpeed < maxFallSpeed) {
-				currentFallSpeed += acceleration ;
+				currentFallSpeed += (acceleration/350);
 			}
 		}
 
@@ -134,10 +136,13 @@ public class Player extends Rectangle {
 			right = true;
 		if (k == KeyEvent.VK_A)
 			left = true;
+//		if(k == KeyEvent.VK_SPACE) {
+//			jumping = true;
+//			System.out.println("o");
+//		}
 		if (k == KeyEvent.VK_SPACE && !jumping && !falling ) {
 			jumping = true; // To add double-jumping, removing !jumping and !falling
-			System.out.print("x");
-			
+			System.out.println("x");	
 		}
 			
 	}

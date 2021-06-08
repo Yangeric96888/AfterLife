@@ -1,4 +1,5 @@
 package afterlife.game.gamestate;
+import java.awt.Color;
 import java.awt.Graphics;
 
 import afterlife.game.entity.Player;
@@ -26,22 +27,18 @@ public class Level1State extends GameState{
 
 	}
 
-	@Override
 	public void tick() {
-		player.tick(map.getBlock());
+		player.tick(map.getBlock(), map.getMovingBlocks());
 	}
 
-	@Override
 	public void draw(Graphics g) {
 		player.draw(g);
-		
 		map.draw(g);
 	}
 
 	@Override
 	public void keyPressed(int k) {
 		player.keyPressed(k);
-		
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package afterlife.game.physic;
 import java.awt.Point;
 
 import afterlife.game.object.Block;
+import afterlife.game.object.MovingBlock;
 
 public class Collision {
 	
@@ -10,4 +11,9 @@ public class Collision {
 	public static boolean playerBlock(Point p, Block b) {
 		return b.contains(p);
 	}
+	
+	public static boolean playerMovingBlock(Point p, MovingBlock b) {
+		return b.contains(p);
+	}
+	
 }

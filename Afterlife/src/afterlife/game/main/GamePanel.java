@@ -5,6 +5,7 @@ package afterlife.game.main;
  * It relies on a GameStateManager object to handle the actual game (like the menu or level screen)
  */
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
@@ -84,9 +85,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		
 		g.clearRect(0, 0, WIDTH, HEIGHT);
-		
 		gsm.draw(g);
 	}
 
@@ -99,7 +98,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		gsm.keyPressed(e.getKeyCode());
-		
 	}
 	
 	@Override
@@ -108,6 +106,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		gsm.keyReleased(e.getKeyCode());
-		
 	}
+	
 }

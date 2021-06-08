@@ -8,10 +8,12 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 import afterlife.game.gamestate.GameState;
 import afterlife.game.main.GamePanel;
 import afterlife.game.object.Block;
+import afterlife.game.object.MovingBlock;
 import afterlife.game.physic.Collision;
 
 public class Player extends Rectangle {
@@ -28,7 +30,6 @@ public class Player extends Rectangle {
 	private double moveSpeed = 6.2;
 
 	// Jump speed
-//	private double jumpSpeed = 0.015;
 	private double jumpSpeed = 0.0015;
 	private double currentJumpSpeed = jumpSpeed;
 
@@ -44,14 +45,14 @@ public class Player extends Rectangle {
 		this.height = height;
 	}
 
-	public void tick(Block[][] b) {
+	public void tick(Block[][] b, ArrayList<MovingBlock> movingBlocks) {
 
 		// Collision
 		for (Block[] currentBlockRow : b) {
 
 			for (Block currentB : currentBlockRow) {
 				if (currentB.getID() != 0) {
-
+					
 					// Right
 					if (Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset + 2, (int) y + (int) GameState.yOffset + 2), currentB)
 							|| Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset + 2, (int) y + height + (int) GameState.yOffset - 1), currentB)) {
@@ -81,6 +82,45 @@ public class Player extends Rectangle {
 					} else if (!topCollision && !jumping) {
 						falling = true;
 					}
+				}
+			}
+		}
+		
+		for(int i = 0; i < movingBlocks.size(); i++) {
+			if(movingBlocks.get(i).getID() != 0) {
+
+				// Right
+				if (Collision.playerMovingBlock(new Point((int) x + width + (int) GameState.xOffset + 2, (int) y + (int) GameState.yOffset + 2), movingBlocks.get(i))
+						|| Collision.playerMovingBlock(new Point((int) x + width + (int) GameState.xOffset + 2, (int) y + height + (int) GameState.yOffset - 1), movingBlocks.get(i))) {
+					right = false;
+					GameState.xOffset--;
+				}
+
+				// Left
+				if (Collision.playerMovingBlock(new Point((int) x + (int) GameState.xOffset - 1, (int) y + (int) GameState.yOffset + 2), movingBlocks.get(i))
+						|| Collision.playerMovingBlock(new Point((int) x + (int) GameState.xOffset - 1, (int) y + height + (int) GameState.yOffset - 1), movingBlocks.get(i))) {
+					left = false;
+					GameState.xOffset++;
+				}
+
+				// Top
+				if (Collision.playerMovingBlock(new Point((int) x + (int) GameState.xOffset + 1, (int) y + (int) GameState.yOffset), movingBlocks.get(i))
+						|| Collision.playerMovingBlock(new Point((int) x + width + (int) GameState.xOffset - 2, (int) y + (int) GameState.yOffset), movingBlocks.get(i))) {					
+					jumping = false;
+					falling = true;
+				}
+
+				// Bottom
+				if (Collision.playerMovingBlock(new Point((int) x + (int) GameState.xOffset + 2, (int) y + height + (int) GameState.yOffset + 1), movingBlocks.get(i))
+						|| Collision.playerMovingBlock(new Point((int) x + width + (int) GameState.xOffset - 2, (int) y + height + (int) GameState.yOffset + 1), movingBlocks.get(i))) {
+					falling = false;
+					topCollision = true;
+					
+					// moves the Player with the MovingBlock
+					GameState.xOffset += movingBlocks.get(i).getMove();
+					
+				} else if (!topCollision && !jumping) {
+					falling = true;
 				}
 			}
 		}

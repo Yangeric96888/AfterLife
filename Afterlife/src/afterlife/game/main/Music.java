@@ -11,6 +11,13 @@ import javax.sound.sampled.LineEvent;
 import javax.sound.sampled.LineListener;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+/*
+ * sad-music: Canción Triste by enrique27naveda
+ * wind: Artic winds by mixkit
+ * autumn-wind by Stek59
+ * UI-Click by EminYILDIRIM
+ */
+
 public class Music  implements Runnable  {
 	Thread t;
 	File audioFile ;

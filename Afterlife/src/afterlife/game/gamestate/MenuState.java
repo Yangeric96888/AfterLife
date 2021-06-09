@@ -5,11 +5,15 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
 import afterlife.game.main.GamePanel;
+import afterlife.game.main.Music;
 
 public class MenuState extends GameState {
 	
 	private String[] options = {"Start", "Help", "Quit"};
 	private int currentSelection = 0;
+	
+	Music help = new Music("sound/help.wav" ,false);
+	
 	
 	protected MenuState(GameStateManager gsm) {
 		super(gsm);
@@ -69,7 +73,7 @@ public class MenuState extends GameState {
 			if (currentSelection == 0) {
 				gsm.states.push(new Level1State(gsm));
 			} else if (currentSelection == 1) {
-				
+				help.play();
 			} else if (currentSelection == 2) {
 				System.exit(0);
 			}

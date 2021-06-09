@@ -36,9 +36,9 @@ public class Level1State extends GameState{
 		player = new Player(30, 30);
 		map = new Map("/Maps/map1.map");
 		
-		xOffset = -200;
-		yOffset =  -400;
-		
+		xOffset = -840;
+		yOffset =  4460;
+
 	}
 
 	public void tick() {

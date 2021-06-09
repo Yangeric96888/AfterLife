@@ -27,7 +27,7 @@ public class Player extends Rectangle {
 	private int width, height;
 
 	// Move speed
-	private double moveSpeed = 5;
+	private double moveSpeed = 5.5;
 
 	// Jump speed
 	private double jumpSpeed = 0.003;
@@ -35,7 +35,7 @@ public class Player extends Rectangle {
 
 	// Fall speed
 	private double maxFallSpeed = 0.003;
-	private double currentFallSpeed = 0.000005;
+	private double currentFallSpeed = 0.00001;
 	private double acceleration = (0.0000005/15);
 
 	public Player(int width, int height) {

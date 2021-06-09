@@ -12,12 +12,16 @@ import java.util.ArrayList;
 
 import afterlife.game.gamestate.GameState;
 import afterlife.game.main.GamePanel;
+import afterlife.game.main.Music;
 import afterlife.game.object.Block;
 import afterlife.game.object.MovingBlock;
 import afterlife.game.physic.Collision;
 
 public class Player extends Rectangle {
 
+	Music jump = new Music("sound/jump-deep.wav", false);
+	Music respawn = new Music("sound/guitar.wav", false);
+	
 	// Movement booleans
 	private boolean right = false, left = false, jumping = false, falling = false;
 	private boolean topCollision = false;
@@ -164,6 +168,13 @@ public class Player extends Rectangle {
 		if (!falling) {
 			currentFallSpeed = 0.0001;
 		}
+		
+		// Reset Method
+		if (false /*GameState.xOffSet < 100*/) {
+			GameState.xOffset = -200;
+			GameState.yOffset =  -400;
+			respawn.play();
+		}
 	}
 
 	public void draw(Graphics g) {
@@ -172,26 +183,27 @@ public class Player extends Rectangle {
 	}
 
 	public void keyPressed(int k) {
-		if (k == KeyEvent.VK_D)
+		if (k == KeyEvent.VK_RIGHT)
 			right = true;
-		if (k == KeyEvent.VK_A)
+		if (k == KeyEvent.VK_LEFT)
 			left = true;
 //		if(k == KeyEvent.VK_SPACE) {
 //			jumping = true;
 //			System.out.println("o");
 //		}
-		if (k == KeyEvent.VK_SPACE && !jumping && !falling ) {
+		if (k == KeyEvent.VK_UP && !jumping && !falling ) {
 			jumping = true; // To add double-jumping, removing !jumping and !falling
 			System.out.println("x");	
+			jump.play();
 		}
 			
 	}
 
 	public void keyReleased(int k) {
-		if (k == KeyEvent.VK_D) {
+		if (k == KeyEvent.VK_RIGHT) {
 			right = false;
 		}
-		if (k == KeyEvent.VK_A)
+		if (k == KeyEvent.VK_LEFT)
 			left = false;
 
 	}

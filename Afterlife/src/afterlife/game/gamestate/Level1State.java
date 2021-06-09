@@ -23,7 +23,7 @@ public class Level1State extends GameState{
 		
 		try {
 			music.play();
-			ambient1.play();
+			//ambient1.play();
 			ambient2.play();
 		} catch (NullPointerException e) {
 			System.out.println(e);
@@ -48,6 +48,9 @@ public class Level1State extends GameState{
 	}
 
 	public void draw(Graphics g) {
+		g.setColor(new Color(50, 70, 200));
+		g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
+		
 		player.draw(g);
 		map.draw(g);
 	}

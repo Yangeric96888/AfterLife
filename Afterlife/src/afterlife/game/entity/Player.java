@@ -40,7 +40,7 @@ public class Player extends Rectangle {
 	public Player(int width, int height) {
 		x = GamePanel.WIDTH / 2;
 		y = GamePanel.HEIGHT / 2;
-		this.width = width;
+		this.width = width; 
 		this.height = height;
 	}
 

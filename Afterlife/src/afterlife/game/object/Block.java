@@ -22,8 +22,6 @@ public class Block extends Rectangle {
 	}
 	
 	public void draw(Graphics g) {
-		// Does not work for some reason g.fillRect(x - (int) GameState.xOffset, y - (int) GameState.yOffset, blockSize, blockSize);
-		g.setColor(Color.black);
 		if(id != 0) {
 			g.drawImage(Images.blocks[id - 1],x - (int) GameState.xOffset, y   - (int) GameState.yOffset , blockSize, blockSize, null);
 		}

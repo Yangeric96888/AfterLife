@@ -8,10 +8,12 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 import afterlife.game.gamestate.GameState;
 import afterlife.game.main.GamePanel;
 import afterlife.game.object.Block;
+import afterlife.game.object.MovingBlock;
 import afterlife.game.physic.Collision;
 
 public class Player extends Rectangle {
@@ -28,14 +30,13 @@ public class Player extends Rectangle {
 	private double moveSpeed = 6.2;
 
 	// Jump speed
-//	private double jumpSpeed = 0.015;
-	private double jumpSpeed = 0.0015;
+	private double jumpSpeed = 0.003;
 	private double currentJumpSpeed = jumpSpeed;
 
 	// Fall speed
-	private double maxFallSpeed = 0.001;
-	private double currentFallSpeed = 0.00000000000000005;
-	private double acceleration = 0.0000005;
+	private double maxFallSpeed = 0.003;
+	private double currentFallSpeed = 0.000005;
+	private double acceleration = (0.0000005/15);
 
 	public Player(int width, int height) {
 		x = GamePanel.WIDTH / 2;
@@ -44,14 +45,14 @@ public class Player extends Rectangle {
 		this.height = height;
 	}
 
-	public void tick(Block[][] b) {
+	public void tick(Block[][] b, ArrayList<MovingBlock> movingBlocks) {
 
 		// Collision
 		for (Block[] currentBlockRow : b) {
 
 			for (Block currentB : currentBlockRow) {
 				if (currentB.getID() != 0) {
-
+					
 					// Right
 					if (Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset + 2, (int) y + (int) GameState.yOffset + 2), currentB)
 							|| Collision.playerBlock(new Point((int) x + width + (int) GameState.xOffset + 2, (int) y + height + (int) GameState.yOffset - 1), currentB)) {
@@ -84,6 +85,45 @@ public class Player extends Rectangle {
 				}
 			}
 		}
+		
+		for(int i = 0; i < movingBlocks.size(); i++) {
+			if(movingBlocks.get(i).getID() != 0) {
+
+				// Right
+				if (Collision.playerMovingBlock(new Point((int) x + width + (int) GameState.xOffset + 2, (int) y + (int) GameState.yOffset + 2), movingBlocks.get(i))
+						|| Collision.playerMovingBlock(new Point((int) x + width + (int) GameState.xOffset + 2, (int) y + height + (int) GameState.yOffset - 1), movingBlocks.get(i))) {
+					right = false;
+					GameState.xOffset--;
+				}
+
+				// Left
+				if (Collision.playerMovingBlock(new Point((int) x + (int) GameState.xOffset - 1, (int) y + (int) GameState.yOffset + 2), movingBlocks.get(i))
+						|| Collision.playerMovingBlock(new Point((int) x + (int) GameState.xOffset - 1, (int) y + height + (int) GameState.yOffset - 1), movingBlocks.get(i))) {
+					left = false;
+					GameState.xOffset++;
+				}
+
+				// Top
+				if (Collision.playerMovingBlock(new Point((int) x + (int) GameState.xOffset + 1, (int) y + (int) GameState.yOffset), movingBlocks.get(i))
+						|| Collision.playerMovingBlock(new Point((int) x + width + (int) GameState.xOffset - 2, (int) y + (int) GameState.yOffset), movingBlocks.get(i))) {					
+					jumping = false;
+					falling = true;
+				}
+
+				// Bottom
+				if (Collision.playerMovingBlock(new Point((int) x + (int) GameState.xOffset + 2, (int) y + height + (int) GameState.yOffset + 1), movingBlocks.get(i))
+						|| Collision.playerMovingBlock(new Point((int) x + width + (int) GameState.xOffset - 2, (int) y + height + (int) GameState.yOffset + 1), movingBlocks.get(i))) {
+					falling = false;
+					topCollision = true;
+					
+					// moves the Player with the MovingBlock
+					GameState.xOffset += movingBlocks.get(i).getMove();
+					
+				} else if (!topCollision && !jumping) {
+					falling = true;
+				}
+			}
+		}
 
 		topCollision = false;
 
@@ -103,7 +143,7 @@ public class Player extends Rectangle {
 		// Jumping
 		if (jumping) {
 			GameState.yOffset -= currentJumpSpeed;
-			currentJumpSpeed -= (acceleration/95);
+			currentJumpSpeed -= acceleration;
 			
 
 			if (currentJumpSpeed <= 0) {
@@ -117,7 +157,7 @@ public class Player extends Rectangle {
 			GameState.yOffset += currentFallSpeed;
 
 			if (currentFallSpeed < maxFallSpeed) {
-				currentFallSpeed += (acceleration/350);
+				currentFallSpeed += acceleration;
 			}
 		}
 

@@ -45,8 +45,6 @@ public class Frame extends JPanel {
 		f.setLocationRelativeTo(null);
 		f.setVisible(true);
 		
-		
-//		f.setSize(new Dimension(1280, 720));
 		f.setBackground(Color.blue);
 		f.add(this);
 		

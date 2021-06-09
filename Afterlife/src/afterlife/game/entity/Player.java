@@ -30,13 +30,13 @@ public class Player extends Rectangle {
 	private double moveSpeed = 6.2;
 
 	// Jump speed
-	private double jumpSpeed = 0.0015;
+	private double jumpSpeed = 0.003;
 	private double currentJumpSpeed = jumpSpeed;
 
 	// Fall speed
-	private double maxFallSpeed = 0.001;
-	private double currentFallSpeed = 0.00000000000000005;
-	private double acceleration = 0.0000005;
+	private double maxFallSpeed = 0.003;
+	private double currentFallSpeed = 0.000005;
+	private double acceleration = (0.0000005/15);
 
 	public Player(int width, int height) {
 		x = GamePanel.WIDTH / 2;
@@ -143,7 +143,7 @@ public class Player extends Rectangle {
 		// Jumping
 		if (jumping) {
 			GameState.yOffset -= currentJumpSpeed;
-			currentJumpSpeed -= (acceleration/95);
+			currentJumpSpeed -= acceleration;
 			
 
 			if (currentJumpSpeed <= 0) {
@@ -157,7 +157,7 @@ public class Player extends Rectangle {
 			GameState.yOffset += currentFallSpeed;
 
 			if (currentFallSpeed < maxFallSpeed) {
-				currentFallSpeed += (acceleration/350);
+				currentFallSpeed += acceleration;
 			}
 		}
 

@@ -18,8 +18,8 @@ import afterlife.game.resources.Images;
 
 public class GamePanel extends JPanel implements Runnable, KeyListener {
 	
-	public static final int WIDTH = 900;
-	public static final int HEIGHT = 550;
+	public static final int WIDTH = 1920;
+	public static final int HEIGHT = 1080;
 	
 	private Thread thread;
 	private boolean isRunning = false;

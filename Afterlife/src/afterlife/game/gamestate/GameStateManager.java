@@ -1,15 +1,20 @@
 package afterlife.game.gamestate;
-/* 
- * Summary: 
- * This is the class that handles the various GameStates by holding them in a stack (with the top one being the one currently running)
- */
-
 import java.awt.Graphics;
 import java.util.Stack;
 
+/**
+ * This class handles the collection of GameStates
+ * <p>
+ * The active gamestate is always on the top of the stack
+ * </p>
+ * <p>
+ * If the player goes to a new game state, it is added to the stack
+ * </p>
+ */
+
 public class GameStateManager {
 	
-	public Stack<GameState> states;
+	public Stack<GameState> states;	// Stack of the activated gamestates
 	
 	public GameStateManager() {
 		states = new Stack<GameState>();

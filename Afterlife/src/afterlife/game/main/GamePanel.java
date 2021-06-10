@@ -1,10 +1,4 @@
 package afterlife.game.main;
-/* 
- * Summary: 
- * This is the main class that handles the logistics behind the game, such as starting it and handling FPS. 
- * It relies on a GameStateManager object to handle the actual game (like the menu or level screen)
- */
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -16,14 +10,27 @@ import javax.swing.JPanel;
 import afterlife.game.gamestate.GameStateManager;
 import afterlife.game.resources.Images;
 
+/**
+ * Technical code behind running the game itself
+ * <p>
+ * Handles FPS, game loop, and painting
+ * </p>
+ * <p>
+ * Calls on the GameState Manager to handle other aspects of the code (ticking, gamestates)
+ * </p>
+ */
+
 public class GamePanel extends JPanel implements Runnable, KeyListener {
 	
+	// Frame size
 	public static final int WIDTH = 1920;
 	public static final int HEIGHT = 1080;
 	
+	// Gameloop variables
 	private Thread thread;
 	private boolean isRunning = false;
 	
+	// FPS
 	private int FPS = 60;
 	private long targetTime = 1000 / FPS;
 	
@@ -47,9 +54,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	}
 	
 	/*
-	 * ******************************
+	 * ===================================================================
 	 * MAIN GAME LOOP
-	 * ******************************
+	 * ===================================================================
 	 */
 	
 	public void run() {
@@ -79,6 +86,13 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		}
 	}
 	
+	/*
+	 * ===================================================================
+	 * TICK/PAINT/KEY INPUTS
+	 * Passes them onto the gamestate Manager
+	 * ===================================================================
+	 */
+	
 	public void tick() {
 		gsm.tick();
 	}
@@ -88,12 +102,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		g.clearRect(0, 0, WIDTH, HEIGHT);
 		gsm.draw(g);
 	}
-
-	/*
-	 * ******************************
-	 * KEY INPUTS
-	 * ******************************
-	 */
 
 	@Override
 	public void keyPressed(KeyEvent e) {

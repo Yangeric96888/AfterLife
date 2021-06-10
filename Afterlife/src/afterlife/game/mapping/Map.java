@@ -1,5 +1,4 @@
 package afterlife.game.mapping;
-
 import java.awt.Graphics;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,6 +8,10 @@ import java.util.ArrayList;
 
 import afterlife.game.object.Block;
 import afterlife.game.object.MovingBlock;
+
+/**
+ * Handles the technicalities behind loading in a map
+ */
 
 public class Map {
 	
@@ -22,7 +25,6 @@ public class Map {
 	
 	public Map(String loadPath) {
 		path = loadPath;
-		
 		loadMap();
 		
 	}

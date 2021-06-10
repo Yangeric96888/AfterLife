@@ -1,9 +1,12 @@
 package afterlife.game.resources;
-
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+
+/**
+ * Handles the technicalities behind loading in images as blocks
+ */
 
 public class Images {
 	

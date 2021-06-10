@@ -38,6 +38,8 @@ public class Level1State extends GameState{
 		
 		xOffset = -840;
 		yOffset =  4460;
+//		xOffset = 3440;
+//		yOffset =  2600;
 
 	}
 

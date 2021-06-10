@@ -14,7 +14,7 @@ import java.util.Stack;
 
 public class GameStateManager {
 	
-	public Stack<GameState> states;
+	public Stack<GameState> states;	// Stack of the activated gamestates
 	
 	public GameStateManager() {
 		states = new Stack<GameState>();

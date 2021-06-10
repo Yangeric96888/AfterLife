@@ -14,18 +14,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class Frame extends JPanel {
-	
-	/*
-	 * Create Objects
-	 */ 
-	
-	/*
-	 * Create music 
-	 */
-//	Music example = new Music("sound/exampleName.wav", false);
+/**
+ * Contains the technical details on running the Java frame
+ * <p> 
+ * This is where the code is actually started from
+ * </p>
+ */
 
-	
+public class Frame extends JPanel {
+
 	public void paint(Graphics g) {
 		super.paint(g);	// Refresh the JFrame 
 	}

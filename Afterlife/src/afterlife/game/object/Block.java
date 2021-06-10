@@ -1,11 +1,14 @@
 package afterlife.game.object;
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import afterlife.game.gamestate.GameState;
 import afterlife.game.resources.Images;
+
+/**
+ * Represents an individual block
+ */
 
 public class Block extends Rectangle {
 	

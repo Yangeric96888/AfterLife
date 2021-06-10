@@ -15,37 +15,33 @@ public class MenuState extends GameState {
 	
 	Music help = new Music("sound/help.wav", false);
 	
-	private String[] options = {"Start", "Help", "Quit"};
-	private int currentSelection = 0;
+	private String[] options = {"Start", "Help", "Quit"};	// Contains all of the potential buttons
+	private int currentSelection = 0;	// Represents what button the player is on
 	
 	protected MenuState(GameStateManager gsm) {
 		super(gsm);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void init() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void tick() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void draw(Graphics g) {
-		
 		// Set background
 		g.setColor(new Color(50, 70, 200));
 		g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
 		
 		// Draws the buttons
 		for (int i = 0; i < options.length; i++) {
+			// Currently selected
 			if (i == currentSelection) {
 				g.setColor(Color.green);
+			// Not currently selected
 			} else {
 				g.setColor(Color.white);
 			}
@@ -71,7 +67,7 @@ public class MenuState extends GameState {
 			}
 		}
 		
-		// When players picks a button
+		// Occurs when player picks a button
 		if (k == KeyEvent.VK_ENTER) {
 			if (currentSelection == 0) {
 				gsm.states.push(new Level1State(gsm));
@@ -84,9 +80,7 @@ public class MenuState extends GameState {
 	}
 
 	@Override
-	public void keyReleased(int k) {
-
-		
+	public void keyReleased(int k) {		
 	}
 
 }

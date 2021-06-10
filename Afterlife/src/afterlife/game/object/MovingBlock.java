@@ -1,10 +1,13 @@
 package afterlife.game.object;
-
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import afterlife.game.gamestate.GameState;
 import afterlife.game.resources.Images;
+
+/**
+ * Represents an individual moving block
+ */
 
 public class MovingBlock extends Rectangle {
 
@@ -21,8 +24,11 @@ public class MovingBlock extends Rectangle {
 		this.leftBound = leftBound;
 	}
 	
+	/*
+	 * If the moving block hits the right end of its range, it moves left
+	 * If the moving block hits the left end of its range, it moves right
+	 */
 	public void tick() {
-		
 		// right side of block has hit rightBound
 		if(x + width - GameState.xOffset >= rightBound - GameState.xOffset && move != 1) {
 			move *= -1;

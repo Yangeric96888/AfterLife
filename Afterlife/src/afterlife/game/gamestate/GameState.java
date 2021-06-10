@@ -1,14 +1,13 @@
 package afterlife.game.gamestate;
-/* 
- * Summary: 
- * There will be many GameStates (like one of the menu, playing the game, etc...), and this abstract class sets a framework for each one
- */
-
 import java.awt.Graphics;
+
+/**
+ * This is the abstract class as the framework for any of the gamestate
+ */
 
 public abstract class GameState {
 	protected GameStateManager gsm;
-	public static double xOffset, yOffset;
+	public static double xOffset, yOffset;	// Represents how much the map needs to be shifted as the player moves
 	
 	public GameState(GameStateManager gsm) {
 		this.gsm = gsm;
@@ -19,8 +18,17 @@ public abstract class GameState {
 		init();
 	}
 	
+	/**
+	 * Represents the initial creation of the gamestate
+	 */
 	public abstract void init();
+	
+	/**
+	 * Updates the gamestate per tick
+	 */
 	public abstract void tick();
+	
+	
 	public abstract void draw(Graphics g);
 	public abstract void keyPressed(int k);
 	public abstract void keyReleased(int k);

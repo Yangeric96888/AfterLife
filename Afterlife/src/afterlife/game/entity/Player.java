@@ -1,8 +1,4 @@
 package afterlife.game.entity;
-/* Summary:
- * Holds the code for the player
- */
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -17,12 +13,23 @@ import afterlife.game.object.Block;
 import afterlife.game.object.MovingBlock;
 import afterlife.game.physic.Collision;
 
-public class Player extends Rectangle {
+/**
+ * This class represents the player along with its map collisions and movement
+ * <p>
+ * Up-down movement is represented by jumping and (after hitting the top of jump) falling.
+ * </p>
+ * <p>
+ * Movement is represented by relatively moving the map (not the character)
+ * </p>
+ * 
+ */
 
-	Music jump = new Music("sound/jump-deep.wav", false);
+public class Player extends Rectangle {
+	
+	// Sound
 	Music respawn = new Music("sound/guitar.wav", false);
 	
-	// Movement booleans
+	// Movement 
 	private boolean right = false, left = false, jumping = false, falling = false;
 	private boolean topCollision = false;
 
@@ -41,17 +48,28 @@ public class Player extends Rectangle {
 	private double maxFallSpeed = 0.003;
 	private double currentFallSpeed = 0.00001;
 	private double acceleration = (0.0000005/15);
-
+	
+	// Constructor
 	public Player(int width, int height) {
 		x = GamePanel.WIDTH / 2;
 		y = GamePanel.HEIGHT / 2;
 		this.width = width; 
 		this.height = height;
 	}
-
+	
+	/**
+	 * @param b - 2d array of all of the blocks in the map
+	 * @param movBlocks - arraylist of all movingblocks
+	 */
 	public void tick(Block[][] b, ArrayList<MovingBlock> movingBlocks) {
 
-		// Collision
+		/*
+		 * ===================================================================
+		 * COLLISION
+		 * Cycles through all blocks and checks if they collide with the player!
+		 * ===================================================================
+		 */
+		
 		for (Block[] currentBlockRow : b) {
 
 			for (Block currentB : currentBlockRow) {
@@ -88,6 +106,7 @@ public class Player extends Rectangle {
 					}
 				}
 			}
+			
 		}
 		
 		for(int i = 0; i < movingBlocks.size(); i++) {
@@ -106,7 +125,7 @@ public class Player extends Rectangle {
 					left = false;
 					GameState.xOffset++;
 				}
-
+				
 				// Top
 				if (Collision.playerMovingBlock(new Point((int) x + (int) GameState.xOffset + 1, (int) y + (int) GameState.yOffset), movingBlocks.get(i))
 						|| Collision.playerMovingBlock(new Point((int) x + width + (int) GameState.xOffset - 2, (int) y + (int) GameState.yOffset), movingBlocks.get(i))) {					
@@ -131,9 +150,12 @@ public class Player extends Rectangle {
 
 		topCollision = false;
 
-		// Movement for player
-		// !!! The movement right now is bugged because when you press, it just flies
-		// off
+		/*
+		 * ===================================================================
+		 * MOVEMENT
+		 * ===================================================================
+		 */
+		
 		if (right) {
 			GameState.xOffset += moveSpeed;
 			right = false;
@@ -156,7 +178,8 @@ public class Player extends Rectangle {
 				falling = true;
 			}
 		}
-
+		
+		// Falling
 		if (falling) {
 			GameState.yOffset += currentFallSpeed;
 
@@ -168,35 +191,27 @@ public class Player extends Rectangle {
 		if (!falling) {
 			currentFallSpeed = 0.0001;
 		}
-		
-		// Reset Method
-		if (false /*GameState.xOffSet < 100*/) {
-			GameState.xOffset = -200;
-			GameState.yOffset =  -400;
-			respawn.play();
-		}
 	}
-
+	
+	/*
+	 * ===================================================================
+	 * DRAWING AND KEY INPUTS
+	 * ===================================================================
+	 */
 	public void draw(Graphics g) {
 		g.setColor(Color.BLACK);
 		g.fillRect((int) x, (int) y, width, height);
 	}
-
+	
 	public void keyPressed(int k) {
 		if (k == KeyEvent.VK_RIGHT)
 			right = true;
 		if (k == KeyEvent.VK_LEFT)
 			left = true;
-//		if(k == KeyEvent.VK_SPACE) {
-//			jumping = true;
-//			System.out.println("o");
-//		}
 		if (k == KeyEvent.VK_UP && !jumping && !falling ) {
 			jumping = true; // To add double-jumping, removing !jumping and !falling
 			System.out.println("x");	
-			jump.play();
-		}
-			
+		}	
 	}
 
 	public void keyReleased(int k) {
@@ -205,7 +220,5 @@ public class Player extends Rectangle {
 		}
 		if (k == KeyEvent.VK_LEFT)
 			left = false;
-
 	}
-
 }

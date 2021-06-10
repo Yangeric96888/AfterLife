@@ -7,13 +7,16 @@ import java.awt.event.KeyEvent;
 import afterlife.game.main.GamePanel;
 import afterlife.game.main.Music;
 
+/**
+ * This is the code for the menu
+ */
+
 public class MenuState extends GameState {
+	
+	Music help = new Music("sound/help.wav", false);
 	
 	private String[] options = {"Start", "Help", "Quit"};
 	private int currentSelection = 0;
-	
-	Music help = new Music("sound/help.wav" ,false);
-	
 	
 	protected MenuState(GameStateManager gsm) {
 		super(gsm);

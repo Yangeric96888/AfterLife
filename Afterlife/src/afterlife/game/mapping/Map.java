@@ -23,12 +23,21 @@ public class Map {
 	
 	private int width, height;
 	
+	/**
+	 * This is the Map class's constructor.
+	 * It is responsible for using the input of the location and name of the map file
+	 * and loading the desired map file.
+	 */
 	public Map(String loadPath) {
 		path = loadPath;
 		loadMap();
 		
 	}
 	
+	/**
+	 * This is the method that paints the blocks
+	 * by going through a 2D array of 0s and 1s representing air and blocks respectively.
+	 */
 	public void draw(Graphics g) {
 
 		for (int i = 0; i < blocks.length; i++) {
@@ -43,6 +52,11 @@ public class Map {
 		
 	}
 	
+	/*
+	 * Loads the map using an InputStream and BufferedReader
+	 * It does this by going row by row in the text document and creating 1D arrays representing blocks or no blocks
+	 * If the if of the element in the map is a 1 then a block is drawn.
+	 */
 	public void loadMap() {
 		InputStream is = this.getClass().getResourceAsStream(path);
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -84,10 +98,16 @@ public class Map {
 
 	}
 	
+	/**
+	 * getter for 2D array of Blocks
+	 */
 	public Block[][] getBlock() {
 		return blocks;
 	}
 	
+	/**
+	 * getter for ArrayList of MovingBlocks
+	 */
 	public ArrayList<MovingBlock> getMovingBlocks(){
 		return movingBlocks;
 	}

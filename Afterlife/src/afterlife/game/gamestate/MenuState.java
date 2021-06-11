@@ -14,8 +14,9 @@ import afterlife.game.main.Music;
 public class MenuState extends GameState {
 	
 	Music help = new Music("sound/help.wav", false);
+	Music about = new Music("sound/about.wav", false);
 	
-	private String[] options = {"Start", "Help", "Quit"};	// Contains all of the potential buttons
+	private String[] options = {"Start", "Help", "About", "Quit"};	// Contains all of the potential buttons
 	private int currentSelection = 0;	// Represents what button the player is on
 	
 	protected MenuState(GameStateManager gsm) {
@@ -36,6 +37,11 @@ public class MenuState extends GameState {
 		g.setColor(new Color(50, 70, 200));
 		g.fillRect(0, 0, GamePanel.WIDTH, GamePanel.HEIGHT);
 		
+		// Title
+		g.setColor(Color.white);
+		g.setFont(new Font("Arial", Font.PLAIN, 144));
+		g.drawString("Afterlife", GamePanel.WIDTH / 2 - 235, 150);
+		
 		// Draws the buttons
 		for (int i = 0; i < options.length; i++) {
 			// Currently selected
@@ -48,13 +54,16 @@ public class MenuState extends GameState {
 			
 			// g.drawLine(GamePanel.WIDTH / 2, 0, GamePanel.WIDTH / 2, GamePanel.HEIGHT);
 			g.setFont(new Font("Arial", Font.PLAIN, 72));
-			g.drawString(options[i], GamePanel.WIDTH / 2 - 75, 150 + i * 150);
+			g.drawString(options[i], GamePanel.WIDTH / 2 - 75, 350 + i * 150);
+			
 		}
 		
 	}
 
 	@Override
 	public void keyPressed(int k) {
+		
+		// Move between buttons
 		if (k == KeyEvent.VK_DOWN) {
 			currentSelection++;
 			if (currentSelection >= options.length) {
@@ -74,6 +83,8 @@ public class MenuState extends GameState {
 			} else if (currentSelection == 1) {
 				help.play();
 			} else if (currentSelection == 2) {
+				about.play();
+			} else if (currentSelection == 3) {
 				System.exit(0);
 			}
 		}

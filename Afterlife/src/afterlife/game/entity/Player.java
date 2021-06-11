@@ -28,6 +28,7 @@ public class Player extends Rectangle {
 	
 	// Sound
 	Music respawn = new Music("sound/guitar.wav", false);
+	Music jump = new Music("sound/jump-deep.wav", false);
 	
 	// Movement 
 	private boolean right = false, left = false, jumping = false, falling = false;
@@ -212,6 +213,7 @@ public class Player extends Rectangle {
 			left = true;
 		if (k == KeyEvent.VK_UP && !jumping && !falling ) {
 			jumping = true; // To add double-jumping, removing !jumping and !falling	
+			jump.play();
 		}	
 	}
 

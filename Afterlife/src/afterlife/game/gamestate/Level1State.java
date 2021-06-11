@@ -28,14 +28,14 @@ public class Level1State extends GameState{
 		// Play music
 		try {
 			music.play();
-			ambient2.play();
+			ambient1.play();
 		} catch (NullPointerException e) {
 			System.out.println(e);
 		}
 
 	}
 
-	// Loads the initial player nad map in
+	// Loads the initial player and map in
 	public void init() {
 		player = new Player(30, 30);
 		map = new Map("/Maps/map1.map");
@@ -43,9 +43,6 @@ public class Level1State extends GameState{
 		// Sets initial map offset
 		xOffset = -840;
 		yOffset =  4460;
-//		xOffset = 3440;
-//		yOffset =  2600;
-
 	}
 	
 	/*

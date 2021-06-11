@@ -9,6 +9,10 @@ import afterlife.game.main.Music;
 import afterlife.game.mapping.Map;
 import afterlife.game.object.Block;
 
+/**
+ * Handles the code behind level 1
+ */
+
 public class Level1State extends GameState{
 	
 	private Player player;
@@ -21,32 +25,35 @@ public class Level1State extends GameState{
 	public Level1State(GameStateManager gsm) {
 		super(gsm);
 		
+		// Play music
 		try {
 			music.play();
-			//ambient1.play();
-			ambient2.play();
+			ambient1.play();
 		} catch (NullPointerException e) {
 			System.out.println(e);
 		}
 
 	}
 
-	@Override
+	// Loads the initial player and map in
 	public void init() {
 		player = new Player(30, 30);
 		map = new Map("/Maps/map1.map");
 		
+		// Sets initial map offset
 		xOffset = -840;
 		yOffset =  4460;
-//		xOffset = 3440;
-//		yOffset =  2600;
-
 	}
-
+	
+	/*
+	 * ===================================================================
+	 * TICK, DRAW, KEY PRESS
+	 * Passes it onto the player and map object
+	 * ===================================================================
+	 */
+	
 	public void tick() {
 		player.tick(map.getBlock(), map.getMovingBlocks());
-		
-		
 	}
 
 	public void draw(Graphics g) {

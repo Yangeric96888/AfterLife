@@ -28,6 +28,7 @@ public class Player extends Rectangle {
 	
 	// Sound
 	Music respawn = new Music("sound/guitar.wav", false);
+	Music jump = new Music("sound/jump-deep.wav", false);
 	
 	// Movement 
 	private boolean right = false, left = false, jumping = false, falling = false;
@@ -187,7 +188,8 @@ public class Player extends Rectangle {
 				currentFallSpeed += acceleration;
 			}
 		}
-
+		
+		// Not falling
 		if (!falling) {
 			currentFallSpeed = 0.0001;
 		}
@@ -203,14 +205,15 @@ public class Player extends Rectangle {
 		g.fillRect((int) x, (int) y, width, height);
 	}
 	
+	// Handles jump, moving left/right
 	public void keyPressed(int k) {
 		if (k == KeyEvent.VK_RIGHT)
 			right = true;
 		if (k == KeyEvent.VK_LEFT)
 			left = true;
 		if (k == KeyEvent.VK_UP && !jumping && !falling ) {
-			jumping = true; // To add double-jumping, removing !jumping and !falling
-			System.out.println("x");	
+			jumping = true; // To add double-jumping, removing !jumping and !falling	
+			jump.play();
 		}	
 	}
 
